@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Try/Catch — erros e carregamento com o exemplo da pizza</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="pizza.js" defer></script>
+    <script src="index.js" defer></script>
+  </head>
+  <body>
+    <main>
+      <h1>Try/Catch: do pedido à entrega da pizza</h1>
+      <p>Esta é uma simulação local com temporizadores. Pratique sucesso, falha e limpeza do carregamento sem enviar pedidos reais.</p>
+
+      <section aria-labelledby="titulo-controles">
+        <h2 id="titulo-controles">1. Escolha o cenário</h2>
+        <form id="form-pedido" novalidate>
+          <label for="nome-pedido">Nome para identificar a simulação</label>
+          <input id="nome-pedido" name="pedido" type="text" value="Pedido de estudo" autocomplete="off">
+          <p>Deixe o nome vazio para observar a validação com throw new Error().</p>
+          <label for="cenario">Resultado simulado</label>
+          <select id="cenario">
+            <option value="sucesso">Preparo e entrega com sucesso</option>
+            <option value="cozinha">Falha no preparo</option>
+            <option value="entrega">Falha na entrega</option>
+          </select>
+          <label for="tempo-ms">Espera de cada etapa, em milissegundos</label>
+          <input id="tempo-ms" type="number" min="100" max="10000" step="100" value="3000">
+          <button id="iniciar" type="submit">Executar pedido simulado</button>
+        </form>
+      </section>
+
+      <section aria-labelledby="titulo-fluxo">
+        <h2 id="titulo-fluxo">2. Acompanhe try, catch e finally</h2>
+        <p id="estado-pedido" role="status" data-estado="idle">Aguardando uma tentativa.</p>
+        <p id="carregamento" role="status">Carregando: false</p>
+        <div id="painel-pedido" aria-busy="false">
+          <ol>
+            <li id="etapa-validacao">Validação: não iniciada</li>
+            <li id="etapa-preparo">Preparo: não iniciado</li>
+            <li id="etapa-entrega">Entrega: não iniciada</li>
+          </ol>
+          <h3>Informações do erro tratado</h3>
+          <pre id="diagnostico" aria-label="Diagnóstico do erro">Nenhum erro capturado nesta tentativa.</pre>
+          <h3>Registro da tentativa</h3>
+          <ol id="log-pedido"></ol>
+        </div>
+        <p>Execuções de finally nesta página: <span id="total-finally">0</span></p>
+      </section>
+
+      <section aria-labelledby="titulo-interacao">
+        <h2 id="titulo-interacao">3. A interface durante a espera</h2>
+        <button id="interagir" type="button">Interagir enquanto aguarda</button>
+        <p id="contador" role="status">Interações: 0</p>
+        <p>Depois de qualquer resultado, os controles do pedido são liberados por finally. Experimente uma falha e, em seguida, uma nova tentativa de sucesso.</p>
+      </section>
+      <noscript>Ative o JavaScript no navegador para executar os exemplos.</noscript>
+    </main>
+  </body>
+</html>
